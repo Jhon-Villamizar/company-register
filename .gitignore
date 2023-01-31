@@ -111,3 +111,5 @@ dist
 # Compiled JavaScript files
 lib/**/*.js
 lib/**/*.js.map
+./functions/lib/**/*.js
+./functions/lib/**/*.js.map

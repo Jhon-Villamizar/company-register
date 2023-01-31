@@ -41,8 +41,5 @@ admin.initializeApp({
     // app.listen(PORT);
     console.log(`listen on port ${envConfig_1.PORT}`);
 })();
-// // Start writing functions
-// // https://firebase.google.com/docs/functions/typescript
-//
 exports.crud = functions.https.onRequest(app_1.default);
 //# sourceMappingURL=index.js.map
