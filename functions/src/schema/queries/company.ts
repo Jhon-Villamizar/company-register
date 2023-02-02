@@ -18,3 +18,13 @@ export const GET_COMPANY = {
     return await Companies.findOneBy({nit: nit});
   },
 };
+
+export const GET_COMPANY_BY_USER_ID = {
+  type: CompanyType,
+  args: {
+    id: {type: GraphQLID},
+  },
+  resolve: async (_: any, {id}: any) =>{
+    return await Companies.findOneBy({userId: id});
+  },
+};
