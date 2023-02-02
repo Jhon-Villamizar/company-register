@@ -11,7 +11,7 @@ admin.initializeApp({
 
 (() => {
   connectionDB;
-  app.listen(PORT);
+  // app.listen(PORT);
   console.log(`listen on port ${PORT}`);
 })();
 
