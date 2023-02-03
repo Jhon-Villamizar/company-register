@@ -2,7 +2,11 @@ export type MyContextType = {
 	logged: boolean,
 	changeLogged: (newLogged: boolean) => void,
 	userId: string,
-	uploadUser: (newUser: string) => void,
+	updateUser: (newUser: string) => void,
 	company: any,
-	uploadCompany: (newCompany: any) => void
+	updateCompany: (newCompany: any) => void
+	companies: any,
+	updateCompanies: (newCompanies: any) => void
+	inventory: any,
+	updateInventory: (newInventory: any) => void
 }

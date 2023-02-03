@@ -3,7 +3,7 @@ import {CREATE_COMPANY, DELETE_COMPANY, UPDATE_COMPANY} from "./mutations/compan
 import {CREATE_INVENTORY, DELETE_INVENTORY, UPDATE_INVENTORY} from "./mutations/inventory";
 import {CREATE_USER, DELETE_USER, UPDATE_USER} from "./mutations/user";
 import {GET_ALL_COMPANIES, GET_COMPANY, GET_COMPANY_BY_USER_ID} from "./queries/company";
-import {GET_ALL_INVENTORIES, GET_INVENTORY} from "./queries/inventory";
+import {GET_ALL_INVENTORIES, GET_INVENTORY, GET_INVENTORY_BY_COMPANY_NIT} from "./queries/inventory";
 import {GET_ALL_USERS, GET_USER} from "./queries/user";
 
 const RootQuery = new GraphQLObjectType({
@@ -16,6 +16,7 @@ const RootQuery = new GraphQLObjectType({
     getAllInventories: GET_ALL_INVENTORIES,
     getInventory: GET_INVENTORY,
     getCompanyByUserId: GET_COMPANY_BY_USER_ID,
+    getInventoryByCompanyNit: GET_INVENTORY_BY_COMPANY_NIT
   },
 });
 

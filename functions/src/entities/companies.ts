@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
 import {Users} from "./users";
 
 @Entity()
@@ -18,7 +18,7 @@ export class Companies extends BaseEntity {
     @Column()
       userId: string;
 
-    @OneToOne(() => Users)
+    @ManyToOne(() => Users)
     @JoinColumn()
       user: Users;
 }

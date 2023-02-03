@@ -18,3 +18,13 @@ export const GET_INVENTORY = {
     return await Inventories.findOneBy({id: id});
   },
 };
+
+export const GET_INVENTORY_BY_COMPANY_NIT = {
+  type: new GraphQLList(InventoryType),
+  args: {
+    id: {type: GraphQLID},
+  },
+  resolve: async (_: any, {id}: any) =>{
+    return await Inventories.find({where: {companyNit: id}});
+  },
+};

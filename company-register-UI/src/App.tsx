@@ -7,10 +7,32 @@ import useData from './config/useData'
 import './App.scss'
 
 function App() {
-  const [logged, changeLogged, userId, uploadUser, company, uploadCompany] = useData()
+  const [
+    logged,
+    changeLogged,
+    userId,
+    updateUser,
+    company,
+    updateCompany,
+    companies,
+		updateCompanies,
+    inventory,
+    updateInventory
+  ] = useData()
 
   return (
-    <AdminProvider value={{logged, changeLogged, userId, uploadUser, company, uploadCompany}}>
+    <AdminProvider value={{
+      logged,
+      changeLogged,
+      userId,
+      updateUser,
+      company,
+      updateCompany,
+      companies,
+		  updateCompanies,
+      inventory,
+      updateInventory
+    }}>
         <RouterProvider router={Router} />
     </AdminProvider>
   )

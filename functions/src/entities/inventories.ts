@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Companies} from "./companies";
 
 @Entity()
@@ -16,9 +16,9 @@ export class Inventories extends BaseEntity {
       quantity: number;
 
     @Column()
-      companyNit: number;
+      companyNit: string;
 
-    @OneToOne(() => Companies)
+    @ManyToOne(() => Companies)
     @JoinColumn()
       company: Companies;
 }

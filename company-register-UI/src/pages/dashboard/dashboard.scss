@@ -1,6 +1,6 @@
 .dashboard {
     backdrop-filter: brightness(0.5);
-    background-image: url('../../../public/company.jpg');
+    background-image: url('/companies.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,4 +9,10 @@
 
 .title, .detail {
     text-shadow: -2px -2px 2px #e3e3e3, 2px -2px 2px #e3e3e3, -2px 2px 2px #e3e3e3, 2px 2px 2px #e3e3e3;
+}
+.icons {
+    width: 30%;
+}
+.card-title {
+    width: 40%;
 }

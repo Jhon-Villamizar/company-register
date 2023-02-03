@@ -6,19 +6,19 @@ import { FIND_COMPANY } from '../../querys/company';
 import './dashboard.scss'
 
 const Dashboard = () => {
-  const { logged, userId, company, uploadCompany } = AdminConsumer();
+  const { userId, company, updateCompany } = AdminConsumer();
   const [getCompany, result] = useLazyQuery(FIND_COMPANY)
   useEffect(() => {
     showCompany()
   }, [])
-  useEffect(() => {
+  useEffect(() => {    
     if (result.data) {
-      uploadCompany(result.data.getCompanyByUserId)
+      updateCompany(result.data.getCompanyByUserId)
     }
   }, [result])
 
   const showCompany = () => {
-    getCompany({variables: {userId: userId}});
+    getCompany({ variables: { userId: userId } });
   }
 
   return (
@@ -37,20 +37,38 @@ const Dashboard = () => {
             <div className="row d-flex justify-content-center mt-5">
               <div className="col-xs-12 col-sm-9 col-md-7 col-lg-5 col-xxl-4">
                 <div className="bg-opacity-75 bg-white card mb-5">
-                  <Link to={'/company'}>
-                    <div className="card-body">
-                      This is some text within a card body.
+                  <Link to={'/company'} className='text-decoration-none text-dark'>
+                    <div className="card-body d-flex flex-row">
+                      <div className="icons">
+                        <img src="/company.png" alt="" width={20} height={20} className='float-end' />
+                      </div>
+                      <p className='mb-0 text-center card-title'>Companies</p>
+                      <div className="icons">
+                        <img src="/company.png" alt="" width={20} height={20} />
+                      </div>
                     </div>
                   </Link>
                 </div>
               </div>
-              <div className="col-xs-12 col-sm-9 col-md-7 col-lg-5 col-xxl-4">
-                <div className="bg-opacity-75 bg-white card">
-                  <div className="card-body">
-                    This is some text within a card body.
+              {
+                userId? (
+                  <div className="col-xs-12 col-sm-9 col-md-7 col-lg-5 col-xxl-4">
+                    <div className="bg-opacity-75 bg-white card">
+                      <Link to={'/inventory'} className='text-decoration-none text-dark'>
+                        <div className="card-body d-flex flex-row">
+                          <div className="icons">
+                            <img src="/inventory.png" alt="" width={20} height={20} className='float-end' />
+                          </div>
+                          <p className='mb-0 text-center card-title'>Inventories</p>
+                          <div className="icons">
+                            <img src="/inventory.png" alt="" width={20} height={20} />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </div>
+                ):(null)
+              }
             </div>
           </div>
         </div>

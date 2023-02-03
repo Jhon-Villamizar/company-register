@@ -13,7 +13,7 @@ import './login.scss';
 
 const Login = () => {
 	const { data, error, loading } = useQuery(ALL_USERS);
-	const { changeLogged, uploadUser } = AdminConsumer();
+	const { changeLogged, updateUser } = AdminConsumer();
 	const [emailError, setEmailError] = useState(false)
 	const [passError, setPassError] = useState(false)
 	const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Login = () => {
 				const compare = bcrypt.compareSync(password, user.password)
 				if (compare) {
 					changeLogged(true);
-					uploadUser(user.id)
+					updateUser(user.id)
 					navigate("/dashboard");
 					console.log(user);
 					

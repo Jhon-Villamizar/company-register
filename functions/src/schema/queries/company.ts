@@ -20,11 +20,11 @@ export const GET_COMPANY = {
 };
 
 export const GET_COMPANY_BY_USER_ID = {
-  type: CompanyType,
+  type: new GraphQLList(CompanyType),
   args: {
     id: {type: GraphQLID},
   },
   resolve: async (_: any, {id}: any) =>{
-    return await Companies.findOneBy({userId: id});
+    return await Companies.find({where: {userId: id}});
   },
 };
