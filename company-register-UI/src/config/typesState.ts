@@ -17,5 +17,7 @@ export type MyContextType = {
 
 export type Modal = {
 	active: boolean,
-	companyNit: string
+	from: string,
+	id: string,
+	itemId: string
 } | null

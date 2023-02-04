@@ -30,12 +30,20 @@ const Intentories = () => {
     getInventary({ variables: { companyNit: nit }});
   }
 
+  const hadlerDelete = (id: string) => {
+    console.log('delete: ', id);
+  }
+
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-12">
-          <button type="button" className="btn btn-outline-success" onClick={() => updateModal({active: true, companyNit: nit})}>Add item to inventory</button>
+          {
+            actions?(
+              <button type="button" className="btn btn-outline-success" onClick={() => updateModal({active: true, from: 'inventory', id: nit, itemId: ''})}>Add item to inventory</button>
+            ):(null)
+          }
             <div className='mt-5'>
               {
                 inventory?(
@@ -66,10 +74,10 @@ const Intentories = () => {
                                     actions?(
                                       <td className='text-center'>
                                         <div className="d-flex justify-content-center">
-                                          <button type="button" className="btn btn-primary p-1 button-icon me-1">
+                                          <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'inventory', id: nit, itemId: item.id})}>
                                             <img src="edit.png" alt="" width={22} />
                                           </button>
-                                          <button type="button" className="btn btn-danger p-1 button-icon">
+                                          <button type="button" className="btn btn-danger p-1 button-icon" onClick={() => hadlerDelete(item.id)}>
                                             <img src="delete.png" alt="" width={22} />
                                           </button>
                                         </div>

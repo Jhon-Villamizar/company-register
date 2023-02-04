@@ -8,7 +8,7 @@ const useData = () => {
 	const [inventory, setInventory] = useState<any>(null)
 	const [nit, setNit] = useState<any>(null)
 	const [actions, setActions] = useState<boolean>(false)
-	const [modal, setModal] = useState<Modal>({active: false, companyNit: ''})
+	const [modal, setModal] = useState<Modal>({active: false, from: '', id: '', itemId: ''})
 	const updateUser = (newUser: string) => setUserId(newUser)
 	const updateCompanyUser = (newCompanyUser: any) => setCompanyUser(newCompanyUser)
 	const updateCompanies = (newCompanies: any) => setCompanies(newCompanies)

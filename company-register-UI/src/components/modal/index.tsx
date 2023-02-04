@@ -21,17 +21,17 @@ const Modal = () => {
 
 	const onSubmit = async ({ nit, name, serial, quantity }: any) => {
 		console.log(nit,name, serial, quantity);
-    updateModal({active: false, companyNit: ''})
+    updateModal({active: false, from:'', id: '', itemId: ''})
 	};
   return (
-    <div className='modal-form d-flex align-center'>
-      <div className="card w-50  mx-auto ">
+    <div className='modal-form d-flex'>
+      <div className="card w-50  mx-auto fit-height">
         <div className="card-header">
           Create Item
         </div>
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <input defaultValue={modal? modal?.companyNit : ''} type="text" className="form-control" id="id" {...register('nit')} hidden/>
+            <input defaultValue={modal? modal?.id : ''} type="text" className="form-control" id="id" {...register('nit')} hidden/>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Name</label>
               <input type="text" className="form-control" id="name" {...register('name')} />
@@ -47,7 +47,7 @@ const Modal = () => {
               <input type="number" className="form-control" id="quantity" {...register('quantity')} />
               <p className="text-danger">{errors.quantity?.message as string}</p>
             </div>
-            <button type="submit" className="btn btn-danger " onClick={()=>updateModal({active: false, companyNit: ''})}>Close</button>
+            <button type="submit" className="btn btn-danger " onClick={()=>updateModal({active: false, from:'', id: '', itemId: ''})}>Close</button>
             <button type="submit" className="btn btn-primary float-end">Add</button>
           </form>
         </div>

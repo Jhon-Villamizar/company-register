@@ -4,7 +4,7 @@ import { AdminConsumer } from '../../config/context';
 
 const TableCompany = () => {
   const navigate = useNavigate();
-  const { companyUser, updateNit, updateActions } = AdminConsumer();
+  const { companyUser, updateNit, updateActions, updateModal, userId } = AdminConsumer();
 
   useEffect(() => {
   }, [companyUser])
@@ -16,9 +16,6 @@ const TableCompany = () => {
     navigate('/inventory')
   }
 
-  const hadlerEdit = (company: any) => {
-    console.log('edit: ', company);
-  }
   const hadlerDelete = (nit: string) => {
     console.log('delete: ', nit);
   }
@@ -29,6 +26,10 @@ const TableCompany = () => {
         <div className="col-12">
           {
             companyUser && companyUser.length !== 0 ? (
+              <>
+              <div>
+                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: userId, itemId: ''})}>Add company</button>
+              </div>
               <div className='table-responsive'>
                 <table className="table">
                   <thead>
@@ -56,7 +57,7 @@ const TableCompany = () => {
                           </td>
                           <td className='text-center'>
                             <div className="d-flex justify-content-center">
-                              <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={()=> hadlerEdit(item)}>
+                              <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'inventory', id: userId, itemId: item.nit})}>
                                 <img src="edit.png" alt="" width={22} />
                               </button>
                               <button type="button" className="btn btn-danger p-1 button-icon" onClick={()=> hadlerDelete(item.nit)}>
@@ -70,9 +71,10 @@ const TableCompany = () => {
                   </tbody>
                 </table>
               </div>
+              </>
             ) : (
               <div>
-                <button type='button' className="btn btn-primary">Register your company</button>
+                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: userId, itemId: ''})}>Register your company</button>
               </div>
             )
           }
