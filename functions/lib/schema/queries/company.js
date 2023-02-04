@@ -20,12 +20,12 @@ exports.GET_COMPANY = {
     },
 };
 exports.GET_COMPANY_BY_USER_ID = {
-    type: company_1.CompanyType,
+    type: new graphql_1.GraphQLList(company_1.CompanyType),
     args: {
         id: { type: graphql_1.GraphQLID },
     },
     resolve: async (_, { id }) => {
-        return await companies_1.Companies.findOneBy({ userId: id });
+        return await companies_1.Companies.find({ where: { userId: id } });
     },
 };
 //# sourceMappingURL=company.js.map

@@ -6,15 +6,18 @@ import { FIND_COMPANY } from '../../querys/company';
 import './dashboard.scss'
 
 const Dashboard = () => {
-  const { userId, company, updateCompany } = AdminConsumer();
+  const { companyUser, userId, updateCompanyUser } = AdminConsumer();
   const [getCompany, result] = useLazyQuery(FIND_COMPANY)
   useEffect(() => {
+    console.log(userId);
+    
     showCompany()
   }, [])
   useEffect(() => {    
     if (result.data) {
-      updateCompany(result.data.getCompanyByUserId)
+      updateCompanyUser(result.data.getCompanyByUserId)
     }
+    console.log(companyUser);
   }, [result])
 
   const showCompany = () => {

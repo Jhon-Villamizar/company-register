@@ -8,30 +8,38 @@ import './App.scss'
 
 function App() {
   const [
-    logged,
-    changeLogged,
     userId,
     updateUser,
-    company,
-    updateCompany,
+    companyUser,
+    updateCompanyUser,
     companies,
 		updateCompanies,
     inventory,
-    updateInventory
+    updateInventory,
+    nit,
+		updateNit,
+    actions,
+		updateActions,
+    modal,
+    updateModal
   ] = useData()
 
   return (
     <AdminProvider value={{
-      logged,
-      changeLogged,
       userId,
       updateUser,
-      company,
-      updateCompany,
+      companyUser,
+      updateCompanyUser,
       companies,
 		  updateCompanies,
       inventory,
-      updateInventory
+      updateInventory,
+      nit,
+		  updateNit,
+      actions,
+		  updateActions,
+      modal,
+      updateModal
     }}>
         <RouterProvider router={Router} />
     </AdminProvider>

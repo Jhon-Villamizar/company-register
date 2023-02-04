@@ -18,6 +18,7 @@ const RootQuery = new graphql_1.GraphQLObjectType({
         getAllInventories: inventory_2.GET_ALL_INVENTORIES,
         getInventory: inventory_2.GET_INVENTORY,
         getCompanyByUserId: company_2.GET_COMPANY_BY_USER_ID,
+        getInventoryByCompanyNit: inventory_2.GET_INVENTORY_BY_COMPANY_NIT,
     },
 });
 const Mutation = new graphql_1.GraphQLObjectType({

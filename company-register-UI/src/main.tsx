@@ -6,7 +6,7 @@ import App from './App'
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: 'http://localhost:3000/graphql',
+    uri: 'https://us-central1-regiters-api.cloudfunctions.net/crud/graphql',
   })
 })
 

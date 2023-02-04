@@ -32,10 +32,10 @@ __decorate([
 ], Inventories.prototype, "quantity", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Inventories.prototype, "companyNit", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => companies_1.Companies),
+    (0, typeorm_1.ManyToOne)(() => companies_1.Companies),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", companies_1.Companies)
 ], Inventories.prototype, "company", void 0);

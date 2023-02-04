@@ -16,7 +16,7 @@ const RootQuery = new GraphQLObjectType({
     getAllInventories: GET_ALL_INVENTORIES,
     getInventory: GET_INVENTORY,
     getCompanyByUserId: GET_COMPANY_BY_USER_ID,
-    getInventoryByCompanyNit: GET_INVENTORY_BY_COMPANY_NIT
+    getInventoryByCompanyNit: GET_INVENTORY_BY_COMPANY_NIT,
   },
 });
 

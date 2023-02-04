@@ -3,19 +3,23 @@ import { useQuery } from '@apollo/client';
 import { AdminConsumer } from '../../config/context';
 import { ALL_COMPANIES } from '../../querys/company';
 import './tables.scss'
+import { useNavigate } from 'react-router-dom';
 
 const TableCompanies = () => {
-  const { company, userId, companies, updateCompanies, updateInventory } = AdminConsumer();
+  const navigate = useNavigate();
+  const { companyUser, userId, companies, updateCompanies, updateNit } = AdminConsumer();
   const { data } = useQuery(ALL_COMPANIES);
 
   useEffect(() => {
     if(data) {
       updateCompanies(data.getAllCompanies)
     }
-  }, [data, company])
+  }, [data, companyUser])
 
   const handlerInventory = (id: string) => {
     console.log(id)
+    updateNit(id)
+    navigate('/inventory')
   }
 
   const conUsuario = data?.getAllCompanies?.filter((item: any, index: number) => item.userId!== userId)  
@@ -28,26 +32,31 @@ const TableCompanies = () => {
             {
               companies? (
                 <div className='table-responsive'>
-                  <table className="table border border-light">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
                         <th scope="col">Phone</th>
                         <th scope="col" className='text-center'>Inventary</th>
-                        <th scope="col" className='text-center'>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {
                         companies?(
-                          company?(
+                          companyUser?(
                             conUsuario.map((item: any, index: number) => (
                               <tr key={index}>
                                 <th scope="row">{item.name}</th>
                                 <td>{item.address}</td>
                                 <td>{item.phone}</td>
-                                
+                                <td>
+                                  <div className="text-center">
+                                    <button className='text-center' onClick={()=> handlerInventory(item.nit)}>
+                                      <img src="/inventory.png" alt="" width={20} height={20} />
+                                    </button>
+                                  </div>
+                                </td>
                               </tr>
                             ))
                           ):(
@@ -60,16 +69,6 @@ const TableCompanies = () => {
                                   <div className="text-center">
                                     <button className='text-center' onClick={()=> handlerInventory(item.nit)}>
                                       <img src="/inventory.png" alt="" width={20} height={20} />
-                                    </button>
-                                  </div>
-                                </td>
-                                <td className='text-center'>
-                                  <div className="d-flex justify-content-center">
-                                    <button type="button" className="btn btn-primary p-1 button-icon me-1">
-                                      <img src="edit.png" alt="" width={22} />
-                                    </button>
-                                    <button type="button" className="btn btn-danger p-1 button-icon">
-                                      <img src="delete.png" alt="" width={22} />
                                     </button>
                                   </div>
                                 </td>

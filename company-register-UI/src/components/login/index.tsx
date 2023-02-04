@@ -6,16 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { AdminConsumer } from '../../config/context';
 import { ALL_USERS } from '../../querys';
 import { schema } from '../../schemas/login';
-import { useEffect, useState } from 'react';
 import './login.scss';
 
 
 
 const Login = () => {
 	const { data, error, loading } = useQuery(ALL_USERS);
-	const { changeLogged, updateUser } = AdminConsumer();
-	const [emailError, setEmailError] = useState(false)
-	const [passError, setPassError] = useState(false)
+	const { updateUser } = AdminConsumer();
 	const navigate = useNavigate();
 	
 	const {
@@ -32,11 +29,9 @@ const Login = () => {
 			if (user) {
 				const compare = bcrypt.compareSync(password, user.password)
 				if (compare) {
-					changeLogged(true);
 					updateUser(user.id)
 					navigate("/dashboard");
-					console.log(user);
-					
+					console.log(user);		
 				}
 			} 
 		} catch (error) {

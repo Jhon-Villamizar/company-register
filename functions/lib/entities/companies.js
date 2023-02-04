@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], Companies.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => users_1.Users),
+    (0, typeorm_1.ManyToOne)(() => users_1.Users),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", users_1.Users)
 ], Companies.prototype, "user", void 0);

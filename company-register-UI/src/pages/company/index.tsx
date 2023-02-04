@@ -12,7 +12,7 @@ function Company() {
   }, [companies])
 
   return (
-    <div>
+    <div className='position-relative'>
       <Nav />
       <h2 className='text-center mt-5'>User Company</h2>
       <TableCompany />

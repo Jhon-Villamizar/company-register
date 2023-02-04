@@ -19,15 +19,6 @@ const Nav = () => {
 							<span>Company</span>
 						</Link>
 					</div>
-					{
-						userId? (
-							<div className="">
-								<Link to={'/inventory'}  className='text-decoration-none text-white'>
-									<span>Inventory</span>
-								</Link>
-							</div>
-						):(null)
-					}
 				</div>
 			</div>
 		</nav>
