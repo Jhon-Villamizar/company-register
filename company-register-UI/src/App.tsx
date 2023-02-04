@@ -8,7 +8,7 @@ import './App.scss'
 
 function App() {
   const [
-    userId,
+    user,
     updateUser,
     companyUser,
     updateCompanyUser,
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <AdminProvider value={{
-      userId,
+      user,
       updateUser,
       companyUser,
       updateCompanyUser,

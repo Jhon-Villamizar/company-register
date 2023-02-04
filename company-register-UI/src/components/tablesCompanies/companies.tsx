@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const TableCompanies = () => {
   const navigate = useNavigate();
-  const { companyUser, userId, companies, updateCompanies, updateNit } = AdminConsumer();
+  const { companyUser, user, companies, updateCompanies, updateNit } = AdminConsumer();
   const { data } = useQuery(ALL_COMPANIES);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const TableCompanies = () => {
     navigate('/inventory')
   }
 
-  const conUsuario = data?.getAllCompanies?.filter((item: any, index: number) => item.userId!== userId)  
+  const conUsuario = data?.getAllCompanies?.filter((item: any, index: number) => item.userId!== user?.id)  
 
   return (
     <div className="container">

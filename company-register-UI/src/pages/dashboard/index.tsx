@@ -1,17 +1,19 @@
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react'
 import { Link } from "react-router-dom";
+import Modal from '../../components/modal';
 import { AdminConsumer } from '../../config/context';
 import { FIND_COMPANY } from '../../querys/company';
 import './dashboard.scss'
 
 const Dashboard = () => {
-  const { companyUser, userId, updateCompanyUser } = AdminConsumer();
+  const { companyUser, user, updateCompanyUser, modal, updateModal } = AdminConsumer();
   const [getCompany, result] = useLazyQuery(FIND_COMPANY)
   useEffect(() => {
-    console.log(userId);
-    
-    showCompany()
+    console.log(user);
+    if (user) {
+      showCompany()
+    }
   }, [])
   useEffect(() => {    
     if (result.data) {
@@ -21,14 +23,14 @@ const Dashboard = () => {
   }, [result])
 
   const showCompany = () => {
-    getCompany({ variables: { userId: userId } });
+      getCompany({ variables: { userId: user?.id } });
   }
 
   return (
     <>
       <div className="dashboard end-0 position-fixed start-0 vh-100 z-n1">
       </div>
-      <div className="container content end-0 position-fixed start-0 vh-100 z-1">
+      <div className="container content end-0 position-fixed start-0 vh-100">
         <div className='align-content-center d-flex h-100 row justify-content-sm-center'>
           <div className="col-12">
             <div className="row d-flex justify-content-center">
@@ -52,30 +54,27 @@ const Dashboard = () => {
                     </div>
                   </Link>
                 </div>
-              </div>
-              {
-                userId? (
-                  <div className="col-xs-12 col-sm-9 col-md-7 col-lg-5 col-xxl-4">
-                    <div className="bg-opacity-75 bg-white card">
-                      <Link to={'/inventory'} className='text-decoration-none text-dark'>
-                        <div className="card-body d-flex flex-row">
-                          <div className="icons">
-                            <img src="/inventory.png" alt="" width={20} height={20} className='float-end' />
-                          </div>
-                          <p className='mb-0 text-center card-title'>Inventories</p>
-                          <div className="icons">
-                            <img src="/inventory.png" alt="" width={20} height={20} />
-                          </div>
+                {
+                  !user? (
+                    <div className="bg-opacity-75 bg-white card mb-5">
+                      <div className="card-body d-flex flex-row" onClick={()=>updateModal({active: true, from: 'user', id: '', itemId: ''})}>
+                        <div className="icons">
+                          <img src="/user.png" alt="" width={20} height={20} className='float-end' />
                         </div>
-                      </Link>
+                        <p className='mb-0 text-center card-title'>Register</p>
+                        <div className="icons">
+                          <img src="/user.png" alt="" width={20} height={20} />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ):(null)
-              }
+                  ):(null)
+                }
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {modal?.active?(<Modal />):(null)}
     </>
   )
 }

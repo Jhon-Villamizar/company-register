@@ -6,7 +6,7 @@ import { AdminConsumer } from '../../config/context';
 import Modal from '../../components/modal';
 
 function Company() {
-  const { companies, userId, modal } = AdminConsumer();
+  const { companies, user, modal } = AdminConsumer();
 
   useEffect(() => {
     console.log(companies)
@@ -16,7 +16,7 @@ function Company() {
     <div className='position-relative'>
       <Nav />
       {
-        userId? (
+        user?.id? (
           <>
             <h2 className='text-center mt-5'>User Company</h2>
             <TableCompany />

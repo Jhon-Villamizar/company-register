@@ -29,7 +29,7 @@ const Login = () => {
 			if (user) {
 				const compare = bcrypt.compareSync(password, user.password)
 				if (compare) {
-					updateUser(user.id)
+					updateUser(user)
 					navigate("/dashboard");
 					console.log(user);		
 				}

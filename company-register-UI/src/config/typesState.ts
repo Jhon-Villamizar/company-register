@@ -1,6 +1,6 @@
 export type MyContextType = {
-	userId: string,
-	updateUser: (newUser: string) => void,
+	user: any,
+	updateUser: (newUser: any) => void,
 	companyUser: any,
 	updateCompanyUser: (newCompanyUser: any) => void
 	companies: any,
