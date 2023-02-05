@@ -13,10 +13,12 @@ import { useState } from 'react';
 
 const Login = () => {
 	const [error, setError] = useState('')
-	const { data } = useQuery(ALL_USERS);
+	const { data } = useQuery(ALL_USERS, {
+		fetchPolicy: 'no-cache'
+	});
 	const { updateUser } = AdminConsumer();
 	const navigate = useNavigate();
-	
+
 	const {
 		register,
 		reset,
@@ -34,7 +36,7 @@ const Login = () => {
 				if (compare) {
 					updateUser(user)
 					navigate("/dashboard");
-					console.log(user);		
+					console.log(user);
 				} else {
 					setError('password')
 					reset()

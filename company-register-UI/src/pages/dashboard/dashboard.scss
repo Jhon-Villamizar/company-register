@@ -5,8 +5,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(4px) contrast(75%);
-}
-
+  }
 .title, .detail {
     text-shadow: -2px -2px 2px #e3e3e3, 2px -2px 2px #e3e3e3, -2px 2px 2px #e3e3e3, 2px 2px 2px #e3e3e3;
 }
@@ -15,4 +14,7 @@
 }
 .card-title {
     width: 40%;
+}
+.pointer {
+  cursor: pointer;
 }
