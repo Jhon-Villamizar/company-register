@@ -25,7 +25,6 @@ const TableCompany = () => {
   }
 
   const handlerInventory = (id: string) => {
-    console.log(id, 'bandera')
     updateNit(id)
     updateActions(true)
     navigate('/inventory')
@@ -36,7 +35,7 @@ const TableCompany = () => {
     alert('Company deleted')
     showCompany()
   }
-  
+
   return (
     <div className="container">
       <div className="row">
@@ -45,7 +44,7 @@ const TableCompany = () => {
             companyUser && companyUser.length !== 0 ? (
               <>
               <div>
-                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, item: null})}>Add company</button>
+                <button type='button' className="btn btn-outline-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, item: null})}>Add company</button>
               </div>
               <div className='table-responsive'>
                 <table className="table">

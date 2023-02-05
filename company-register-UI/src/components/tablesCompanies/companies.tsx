@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const TableCompanies = () => {
   const navigate = useNavigate();
   const { companyUser, user, companies, updateCompanies, updateNit } = AdminConsumer();
-  const { data } = useQuery(ALL_COMPANIES);
+  const { data, loading } = useQuery(ALL_COMPANIES);
 
   useEffect(() => {
     if(data) {
@@ -17,12 +17,11 @@ const TableCompanies = () => {
   }, [data, companyUser])
 
   const handlerInventory = (id: string) => {
-    console.log(id)
     updateNit(id)
     navigate('/inventory')
   }
 
-  const conUsuario = data?.getAllCompanies?.filter((item: any, index: number) => item.userId!== user?.id)  
+  const conUsuario = data?.getAllCompanies?.filter((item: any, index: number) => item.userId!== user?.id)
 
   return (
     <div className="container">
@@ -30,7 +29,7 @@ const TableCompanies = () => {
         <div className="col-12">
           <div className='mt-3'>
             {
-              companies? (
+              !loading? (
                 <div className='table-responsive'>
                   <table className="table">
                     <thead>

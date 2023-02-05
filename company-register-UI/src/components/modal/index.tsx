@@ -7,7 +7,6 @@ const Modal = () => {
   const { modal, updateModal } = AdminConsumer();
 
   useEffect(() => {
-    console.log(modal);
   }, [modal])
 
   const Title = (): any => {

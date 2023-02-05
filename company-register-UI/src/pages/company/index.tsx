@@ -9,7 +9,6 @@ function Company() {
   const { companies, user, modal } = AdminConsumer();
 
   useEffect(() => {
-    console.log(companies)
   }, [companies])
 
   return (

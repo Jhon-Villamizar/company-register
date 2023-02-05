@@ -12,7 +12,6 @@ const Dashboard = () => {
     fetchPolicy: 'no-cache'
   })
   useEffect(() => {
-    console.log(user);
     if (user) {
       showCompany()
     }
@@ -21,7 +20,6 @@ const Dashboard = () => {
     if (result.data) {
       updateCompanyUser(result.data.getCompanyByUserId)
     }
-    console.log(companyUser);
   }, [result])
 
   const showCompany = () => {

@@ -9,10 +9,9 @@ const Inventory = () => {
   const { modal } = AdminConsumer();
 
   useEffect(() => {
-    console.log(modal);
-     
+
   }, [modal])
-  
+
   return (
     <div className='position-relative'>
       <Nav />

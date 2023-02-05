@@ -18,11 +18,8 @@ const Intentories = () => {
 
   useEffect(() => {
     if (result.data) {
-      console.log('entra a la peticion', result.data);
       updateInventory(result.data.getInventoryByCompanyNit)
-    }    
-    console.log(inventory);
-    
+    }
   }, [result.data, inventory])
 
 
@@ -43,7 +40,7 @@ const Intentories = () => {
           <div className="col-12">
           {
             actions?(
-              <button type="button" className="btn btn-outline-success" onClick={() => updateModal({active: true, from: 'inventory', id: nit, item: null})}>Add item to inventory</button>
+              <button type="button" className="btn btn-outline-primary" onClick={() => updateModal({active: true, from: 'inventory', id: nit, item: null})}>Add item to inventory</button>
             ):(null)
           }
             <div className='mt-5'>
@@ -62,7 +59,7 @@ const Intentories = () => {
                                   <th scope="col" className='text-center'>Actions</th>
                                 ):(null)
                               }
-                              
+
                             </tr>
                           </thead>
                           <tbody>
@@ -86,7 +83,7 @@ const Intentories = () => {
                                       </td>
                                     ):(null)
                                   }
-                                  
+
                                 </tr>
                               ))
                             }
@@ -95,7 +92,7 @@ const Intentories = () => {
                       </div>
                     ):(
                       <h2>No hay Registros</h2>
-                    ) 
+                    )
                 ):(
                   <div className="d-flex justify-content-center">
                     <div className="spinner-border" role="status">

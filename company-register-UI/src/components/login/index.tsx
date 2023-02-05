@@ -36,7 +36,6 @@ const Login = () => {
 				if (compare) {
 					updateUser(user)
 					navigate("/dashboard");
-					console.log(user);
 				} else {
 					setError('password')
 					reset()
