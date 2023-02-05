@@ -19,5 +19,5 @@ export type Modal = {
 	active: boolean,
 	from: string,
 	id: string,
-	itemId: string
+	item: any
 } | null

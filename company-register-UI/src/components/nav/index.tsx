@@ -4,7 +4,16 @@ import { AdminConsumer } from '../../config/context';
 import './nav.scss'
 
 const Nav = () => {
-	const { user, updateModal, updateUser } = AdminConsumer();
+	const { user, updateActions , updateModal, updateUser } = AdminConsumer();
+
+	const handlerLogout = () => {
+		updateActions(false)
+		updateUser(null)
+	}
+	const handlerSingin = () => {
+		updateActions(false)
+		updateUser(null)
+	}
 	return (
 		<nav className="navbar nav-container">
 			<div className="container d-flex flex-row">
@@ -15,7 +24,7 @@ const Nav = () => {
 				</div>
 				<div className="w-50 d-flex flex-row justify-content-end">
 					<div>
-						<Link to={'/company'}  className='text-decoration-none text-white'>
+						<Link to={'/company'}  className='text-decoration-none text-white' onClick={() => updateActions(false)}>
 							<span>Company</span>
 						</Link>
 					</div>
@@ -23,10 +32,10 @@ const Nav = () => {
 						!user? (
 							<>
 								<div className='ms-3'>
-									<span className='text-white' onClick={()=>updateModal({active: true, from: 'user', id: '',itemId: ''})}>Register</span>
+									<span className='text-white' onClick={()=>updateModal({active: true, from: 'user', id: '',item: null})}>Register</span>
 								</div>
 								<div className='ms-3'>
-									<Link to={'/'} className='text-decoration-none text-white'>
+									<Link to={'/'} className='text-decoration-none text-white' onClick={()=> handlerSingin()}>
 										<span >Sing In</span>
 									</Link>
 								</div>
@@ -34,7 +43,7 @@ const Nav = () => {
 						):(
 							<>
 								<div className='ms-3'>
-									<Link to={'/'} className='text-decoration-none text-white' onClick={() => updateUser(null)}>
+									<Link to={'/'} className='text-decoration-none text-white' onClick={() => handlerLogout()}>
 										<span >Log out</span>
 									</Link>
 								</div>

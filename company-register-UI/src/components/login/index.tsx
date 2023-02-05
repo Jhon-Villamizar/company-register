@@ -4,19 +4,22 @@ import bcrypt from 'bcryptjs';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from "react-router-dom";
 import { AdminConsumer } from '../../config/context';
-import { ALL_USERS } from '../../querys';
+import { ALL_USERS } from '../../querys/user';
 import { schema } from '../../schemas/login';
 import './login.scss';
+import { useState } from 'react';
 
 
 
 const Login = () => {
-	const { data, error, loading } = useQuery(ALL_USERS);
+	const [error, setError] = useState('')
+	const { data } = useQuery(ALL_USERS);
 	const { updateUser } = AdminConsumer();
 	const navigate = useNavigate();
 	
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
@@ -32,9 +35,17 @@ const Login = () => {
 					updateUser(user)
 					navigate("/dashboard");
 					console.log(user);		
+				} else {
+					setError('password')
+					reset()
 				}
-			} 
+			}  else {
+				setError('user')
+				reset()
+			}
 		} catch (error) {
+			alert('petition fail, try again')
+			reset()
 			console.error("Error en la consulta");
 		}
 	};
@@ -68,18 +79,23 @@ const Login = () => {
 								<button type="button" className="btn btn-outline-primary" onClick={() => handlerGuest()}>Guest</button>
 								<button type="submit" className="btn btn-primary float-end">Log In</button>
 							</form>
-							{/* {
-								emailError? (
-									<div className="alert alert-danger d-flex align-items-center mt-2 p-2" role="alert">
-										<b>El usuario no existe!</b>
+							{
+								error.length > 0? (
+									<div className='card-footer'>
+									{
+										error==='user'?(
+											<div className="alert alert-danger d-flex align-items-center mt-2 p-2" role="alert">
+												<b>Email is wrong</b>
+											</div>
+										):(
+											<div className="alert alert-danger d-flex align-items-center mt-2 p-2" role="alert">
+												<b>Password is wrong</b>
+											</div>
+										)
+									}
 									</div>
-								):(passError? (
-									<div className="alert alert-danger d-flex align-items-center mt-2 p-2" role="alert">
-										<b>La password es incorrecta!</b>
-									</div>
-									): (''))
-							} */}
-							
+								):(null)
+							}
 						</div>
 					</div>
 				</div>

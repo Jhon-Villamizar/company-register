@@ -1,13 +1,28 @@
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AdminConsumer } from '../../config/context';
+import { DELETE_COMPANY, FIND_COMPANY } from '../../querys/company';
 
 const TableCompany = () => {
   const navigate = useNavigate();
-  const { companyUser, updateNit, updateActions, updateModal, user } = AdminConsumer();
+  const { companyUser, updateNit, updateActions, updateModal, user, modal, updateCompanyUser } = AdminConsumer();
+  const [getCompany, result] = useLazyQuery(FIND_COMPANY, {
+    fetchPolicy: 'no-cache'
+  })
+  const [deleteCompany] = useMutation(DELETE_COMPANY)
 
   useEffect(() => {
-  }, [companyUser])
+    showCompany()
+  }, [modal])
+
+  useEffect(() => {
+    updateCompanyUser(result?.data?.getCompanyByUserId)
+  }, [result])
+
+  const showCompany = () => {
+    getCompany({ variables: {userId: user?.id} })
+  }
 
   const handlerInventory = (id: string) => {
     console.log(id, 'bandera')
@@ -17,7 +32,9 @@ const TableCompany = () => {
   }
 
   const hadlerDelete = (nit: string) => {
-    console.log('delete: ', nit);
+    deleteCompany({ variables: {nit: nit}})
+    alert('Company deleted')
+    showCompany()
   }
   
   return (
@@ -28,7 +45,7 @@ const TableCompany = () => {
             companyUser && companyUser.length !== 0 ? (
               <>
               <div>
-                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, itemId: ''})}>Add company</button>
+                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, item: null})}>Add company</button>
               </div>
               <div className='table-responsive'>
                 <table className="table">
@@ -57,7 +74,7 @@ const TableCompany = () => {
                           </td>
                           <td className='text-center'>
                             <div className="d-flex justify-content-center">
-                              <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'company', id: user.id, itemId: item.nit})}>
+                              <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'company', id: user.id, item: item})}>
                                 <img src="edit.png" alt="" width={22} />
                               </button>
                               <button type="button" className="btn btn-danger p-1 button-icon" onClick={()=> hadlerDelete(item.nit)}>
@@ -74,7 +91,7 @@ const TableCompany = () => {
               </>
             ) : (
               <div>
-                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, itemId: ''})}>Register your company</button>
+                <button type='button' className="btn btn-primary" onClick={()=>updateModal({active: true, from: 'company', id: user.id, item: null})}>Register your company</button>
               </div>
             )
           }

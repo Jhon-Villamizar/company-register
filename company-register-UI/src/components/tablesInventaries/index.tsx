@@ -1,20 +1,20 @@
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AdminConsumer } from '../../config/context';
-import { FIND_INVENTORIES_BY_COMPANY } from '../../querys/inventory';
+import { DELETE_INVENTORY, FIND_INVENTORIES_BY_COMPANY } from '../../querys/inventory';
 
 const Intentories = () => {
   const navigate = useNavigate();
   const { inventory, nit, updateInventory, actions, modal, updateModal } = AdminConsumer();
-  const [getInventary, result] = useLazyQuery(FIND_INVENTORIES_BY_COMPANY)
+  const [getInventary, result] = useLazyQuery(FIND_INVENTORIES_BY_COMPANY, {
+    fetchPolicy: 'no-cache'
+  })
+  const [deleteInventory] = useMutation(DELETE_INVENTORY)
 
   useEffect(() => {
     showInventary()
-    return () => {
-      updateInventory(null)
-    };
-  }, [])
+  }, [modal])
 
   useEffect(() => {
     if (result.data) {
@@ -30,8 +30,10 @@ const Intentories = () => {
     getInventary({ variables: { companyNit: nit }});
   }
 
-  const hadlerDelete = (id: string) => {
-    console.log('delete: ', id);
+  const hadlerDelete = (id: any) => {
+    deleteInventory({ variables:{id: id}})
+    alert('Inventory deleted')
+    showInventary()
   }
 
   return (
@@ -41,7 +43,7 @@ const Intentories = () => {
           <div className="col-12">
           {
             actions?(
-              <button type="button" className="btn btn-outline-success" onClick={() => updateModal({active: true, from: 'inventory', id: nit, itemId: ''})}>Add item to inventory</button>
+              <button type="button" className="btn btn-outline-success" onClick={() => updateModal({active: true, from: 'inventory', id: nit, item: null})}>Add item to inventory</button>
             ):(null)
           }
             <div className='mt-5'>
@@ -74,7 +76,7 @@ const Intentories = () => {
                                     actions?(
                                       <td className='text-center'>
                                         <div className="d-flex justify-content-center">
-                                          <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'inventory', id: nit, itemId: item.id})}>
+                                          <button type="button" className="btn btn-primary p-1 button-icon me-1" onClick={() => updateModal({active: true, from: 'inventory', id: nit, item: item})}>
                                             <img src="edit.png" alt="" width={22} />
                                           </button>
                                           <button type="button" className="btn btn-danger p-1 button-icon" onClick={() => hadlerDelete(item.id)}>

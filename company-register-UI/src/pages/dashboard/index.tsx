@@ -8,7 +8,9 @@ import './dashboard.scss'
 
 const Dashboard = () => {
   const { companyUser, user, updateCompanyUser, modal, updateModal } = AdminConsumer();
-  const [getCompany, result] = useLazyQuery(FIND_COMPANY)
+  const [getCompany, result] = useLazyQuery(FIND_COMPANY, {
+    fetchPolicy: 'no-cache'
+  })
   useEffect(() => {
     console.log(user);
     if (user) {
@@ -57,7 +59,7 @@ const Dashboard = () => {
                 {
                   !user? (
                     <div className="bg-opacity-75 bg-white card mb-5">
-                      <div className="card-body d-flex flex-row" onClick={()=>updateModal({active: true, from: 'user', id: '', itemId: ''})}>
+                      <div className="card-body d-flex flex-row" onClick={()=>updateModal({active: true, from: 'user', id: '', item: null})}>
                         <div className="icons">
                           <img src="/user.png" alt="" width={20} height={20} className='float-end' />
                         </div>

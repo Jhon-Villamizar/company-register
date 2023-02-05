@@ -13,12 +13,12 @@ const Modal = () => {
   const Title = (): any => {
     switch (modal?.from) {
       case 'inventory':
-        if (modal.itemId.length > 0) {
+        if (modal?.item?.id?.length > 0) {
           return <b>Edit Item</b>
         }
         return <b>Add Item</b>
       case 'company':
-        if(modal.itemId.length > 0) {
+        if(modal.item?.nit?.length > 0) {
           return <b>Edit Company</b>
         }
         return <b>Add Company</b>
