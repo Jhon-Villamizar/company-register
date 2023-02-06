@@ -12,6 +12,8 @@ cd functions
 npm i
 npm run dev
 ```
+run on: http://localhost:3000/graphql
+
 ### Frontend:
 
 ```bash
@@ -19,7 +21,7 @@ cd company-register-UI
 yarn
 yarn dev
 ```
-
+run on: http://localhost:5173/
 
 
 ## Usage
